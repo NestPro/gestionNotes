@@ -13,24 +13,21 @@
       <div class="content">
       
         <div class="info-box">
-            <h4 class="text-black mb-4">Lites des élèves</h4>
+            <h4 class="text-black mb-4">Lites des classes</h4>
             <div class="table-responsive">
                     <table id="myTable" class="table table-bordered table-striped">
                       <thead>
                       <tr>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Ecole</th>
-                        <th>Classe</th>
+                        <th>Code</th>
+                        <th>Nom</th>
                         <th>Action</th>
                       </tr>
                       </thead>
                       <tbody>
-                        @foreach ($etudiants as $etudiant)
+                        @foreach ($classes as $classe)
                         <tr>
-                            <td>{{ $etudiant->first_name }}</td>
-                            <td>{{ $etudiant->last_name }}</td>
-                            <td>{{ $etudiant->classe }}</td>
+                            <td>{{ $classe->code }}</td>
+                            <td>{{ $classe->nom }}</td>
                             <td class="d-flex">
                               <a href="" class="p-2 bg-info  text-black"><i class="fa fa-eye"></i></a>
                               <a href="" class="p-2 bg-warning  text-black"><i class="fa fa-pencil"></i></a>
@@ -61,12 +58,11 @@
       processing: true,
       serverSide: true,
 
-      ajax: '{!! route('see_students') !!}',
+      ajax: '{!! route('see_classes') !!}',
 
       columns: [
-            { data: 'First name', name: 'prenom' },
-            { data: 'Last name', name: 'nom' },
-            { data: 'Ecole', name: 'ecole' },
+            { data: 'First name', name: 'id' },
+            { data: 'Last name', name: 'name' },
             { data: 'Classe', name: 'classe' },
             { data: '', name: '' },
             { data: '', name: '' }

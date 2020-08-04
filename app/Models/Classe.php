@@ -16,4 +16,12 @@ class Classe extends Model
     public function notes(){
         return $this->hasMany('App\Note');
     }
+
+    public function profs(){
+        return $this->hasOne('App\Prof');
+    }
+
+    public function classes(){
+        return $this->belongsToMany('App\Ecole');
+    }
 }

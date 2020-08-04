@@ -27,3 +27,7 @@ Route::get('/dashboard', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/etudiants', 'EtudiantsController@index')->name('see_students');
+Route::get('/etudiants/edit/{id}', 'EtudiantsController@edit')->name('edit_student');
+Route::get('/ecoles', 'EcolesController@index')->name('see_schools');
+Route::get('/ecoles/edit/{id}', 'EcolesController@edit')->name('edit_school');
+Route::get('/classes', 'ClassesController@index')->name('see_classes');

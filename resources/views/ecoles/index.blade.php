@@ -13,24 +13,21 @@
       <div class="content">
       
         <div class="info-box">
-            <h4 class="text-black mb-4">Lites des élèves</h4>
+            <h4 class="text-black mb-4">Lites des écoles</h4>
             <div class="table-responsive">
                     <table id="myTable" class="table table-bordered table-striped">
                       <thead>
                       <tr>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Ecole</th>
-                        <th>Classe</th>
+                        <th>Nom</th>
+                        <th>Adresse</th>
                         <th>Action</th>
                       </tr>
                       </thead>
                       <tbody>
-                        @foreach ($etudiants as $etudiant)
+                        @foreach ($ecoles as $ecole)
                         <tr>
-                            <td>{{ $etudiant->first_name }}</td>
-                            <td>{{ $etudiant->last_name }}</td>
-                            <td>{{ $etudiant->classe }}</td>
+                            <td>{{ $ecole->nom }}</td>
+                            <td>{{ $ecole->addresse }}</td>
                             <td class="d-flex">
                               <a href="" class="p-2 bg-info  text-black"><i class="fa fa-eye"></i></a>
                               <a href="" class="p-2 bg-warning  text-black"><i class="fa fa-pencil"></i></a>
@@ -61,13 +58,12 @@
       processing: true,
       serverSide: true,
 
-      ajax: '{!! route('see_students') !!}',
+      ajax: '{!! route('see_schools') !!}',
 
       columns: [
-            { data: 'First name', name: 'prenom' },
-            { data: 'Last name', name: 'nom' },
-            { data: 'Ecole', name: 'ecole' },
-            { data: 'Classe', name: 'classe' },
+            { data: 'Nom', name: 'nom' },
+            { data: 'Addresse', name: 'addresse' },
+            { data: 'Action', name: 'action' },
             { data: '', name: '' },
             { data: '', name: '' }
             { data: '', name: '' },
