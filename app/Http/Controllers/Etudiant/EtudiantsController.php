@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Etudiant;
 
 use App\Models\Etudiant;
-
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
 
 class EtudiantsController extends Controller
 {
@@ -59,7 +60,32 @@ class EtudiantsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $etudiants = Etudiant::where(['etudiant_id' => $id])->get();
+
+        return view('etudiants.index', ['etudiants' => $etudiants]);
+    }
+
+
+    public function saveStudentChange(Request $request, $id){
+        
+        $validate = $request->validate([
+            'nom' => 'required',
+            'prenom' => 'required',
+            'ecole' => 'required',
+            'classe' => 'required',
+        ]);
+
+        if($validate){
+            $etudiant = Etudiant::where(['id' => $id])->first();
+
+            $etudiant->nom = $validate['nom'];
+            $etudiant->prenom = $validate['adresse'];
+            $etudiant->ecole = $validate['ecole'];
+            $etudiant->classe = $validate['classe'];
+
+            $etudiant->save();
+        }
+        return redirect()->route('see.students');
     }
 
     /**

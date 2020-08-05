@@ -13,7 +13,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header text-uppercase">Admin</li>
-        <li><a href="{{ route('see_students')}}"> <i class="fa fa-users"></i> <span>Liste de vos écoles</span></span> </a></li>
+        <li><a href="{{ route('see.schools')}}"> <i class="fa fa-users"></i> <span>Liste de vos écoles</span></span> </a></li>
         
         <!--<li class="treeview"> <a href="index.html#"> <i class="fa fa-envelope-o "></i> <span>Inbox</span> <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i> </span> </a>
           <ul class="treeview-menu">

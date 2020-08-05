@@ -23,11 +23,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });*/
 
-
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/etudiants', 'EtudiantsController@index')->name('see_students');
-Route::get('/etudiants/edit/{id}', 'EtudiantsController@edit')->name('edit_student');
-Route::get('/ecoles', 'EcolesController@index')->name('see_schools');
-Route::get('/ecoles/edit/{id}', 'EcolesController@edit')->name('edit_school');
-Route::get('/classes', 'ClassesController@index')->name('see_classes');
+Route::get('/etudiants', 'Etudiant\EtudiantsController@index')->name('see.students');
+Route::get('/etudiants/edit/{id}', 'Etudiant\EtudiantsController@edit')->name('edit.student');
+Route::get('/ecoles', 'Ecole\EcolesController@index')->name('see.schools');
+Route::get('/ecoles/delete/{id}', 'Ecole\EcolesController@destroy')->name('delete.school');
+Route::get('/ecoles/edit/{id}', 'Ecole\EcolesController@edit')->name('edit.school');
+Route::post('/ecoles/edit/{id}/save', 'Ecole\EcolesController@saveSchoolChange')->name('edit.school.post');
+Route::get('/classes', 'Classe\ClassesController@index')->name('see.classes');

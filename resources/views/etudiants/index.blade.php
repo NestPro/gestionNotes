@@ -18,8 +18,8 @@
                     <table id="myTable" class="table table-bordered table-striped">
                       <thead>
                       <tr>
-                        <th>First name</th>
-                        <th>Last name</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
                         <th>Ecole</th>
                         <th>Classe</th>
                         <th>Action</th>
@@ -30,9 +30,10 @@
                         <tr>
                             <td>{{ $etudiant->first_name }}</td>
                             <td>{{ $etudiant->last_name }}</td>
+                            <td>{{ $etudiant->ecole }}</td>
                             <td>{{ $etudiant->classe }}</td>
                             <td class="d-flex">
-                              <a href="" class="p-2 bg-info  text-black"><i class="fa fa-eye"></i></a>
+                              <a href="{{ route('show.student') }}" class="p-2 bg-info  text-black"><i class="fa fa-eye"></i></a>
                               <a href="" class="p-2 bg-warning  text-black"><i class="fa fa-pencil"></i></a>
                               <a href="" class="p-2 bg-danger  text-white"><i class="fa fa-trash-o"></i></a>
                             </td>
@@ -61,7 +62,7 @@
       processing: true,
       serverSide: true,
 
-      ajax: '{!! route('see_students') !!}',
+      ajax: '{!! route('see.students') !!}',
 
       columns: [
             { data: 'First name', name: 'prenom' },
@@ -78,3 +79,4 @@
 } );
 </script>
 @endsection
+

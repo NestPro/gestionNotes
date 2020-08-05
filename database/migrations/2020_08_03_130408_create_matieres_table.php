@@ -16,7 +16,7 @@ class CreateMatieresTable extends Migration
         Schema::create('matieres', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nom');
-            $table->integer('coefficient');
+            $table->integer('coefficient')->unsigned();
             $table->timestamps();
         });
     }

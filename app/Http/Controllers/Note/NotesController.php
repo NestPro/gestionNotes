@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Ecole;
+namespace App\Http\Controllers\Note;
 
-use App\Models\Classe;
-use App\Models\Ecole;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-
-class EcolesController extends Controller
+class NotesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,16 +14,7 @@ class EcolesController extends Controller
      */
     public function index()
     {
-        $ecoles = Ecole::all();
-
-        return view('ecoles.index', ['ecoles' => $ecoles]);
-    }
-
-    public function view($id)
-    {
-        $classes = Classe::where(['classe_id' => $id])->get();
-
-        return view('classes.index', ['classes' => $classes]);
+        //
     }
 
     /**
@@ -69,27 +57,7 @@ class EcolesController extends Controller
      */
     public function edit($id)
     {
-        $ecole = Ecole::where(['id' => $id])->first();
-        
-        return view('ecoles.edit', ['ecole' => $ecole]);
-    }
-
-    public function saveSchoolChange(Request $request, $id){
-        
-        $validate = $request->validate([
-            'nom' => 'required',
-            'addresse' => 'required'
-        ]);
-
-        if($validate){
-            $ecole = Ecole::where(['id' => $id])->first();
-
-            $ecole->nom = $validate['nom'];
-            $ecole->addresse = $validate['adresse'];
-
-            $ecole->save();
-        }
-        return redirect()->route('see.schools');
+        //
     }
 
     /**
@@ -112,8 +80,6 @@ class EcolesController extends Controller
      */
     public function destroy($id)
     {
-        Ecole::destroy($id);
-
-        return redirect()->route('see.schools');
+        //
     }
 }

@@ -18,6 +18,7 @@
                     <table id="myTable" class="table table-bordered table-striped">
                       <thead>
                       <tr>
+                        <th>ID</th>
                         <th>Nom</th>
                         <th>Adresse</th>
                         <th>Action</th>
@@ -26,12 +27,13 @@
                       <tbody>
                         @foreach ($ecoles as $ecole)
                         <tr>
+                            <td>{{ $ecole->id }}</td>
                             <td>{{ $ecole->nom }}</td>
                             <td>{{ $ecole->addresse }}</td>
                             <td class="d-flex">
-                              <a href="" class="p-2 bg-info  text-black"><i class="fa fa-eye"></i></a>
-                              <a href="" class="p-2 bg-warning  text-black"><i class="fa fa-pencil"></i></a>
-                              <a href="" class="p-2 bg-danger  text-white"><i class="fa fa-trash-o"></i></a>
+                              <a href="{{ route('see.classes') }} " class="p-2 bg-info  text-black"><i class="fa fa-eye"></i></a>
+                              <a href="{{ route('edit.school', ['id'=>$ecole->id]) }}" class="p-2 bg-warning  text-black"><i class="fa fa-pencil"></i></a>
+                              <a href="{{ route('delete.school', ['id'=>$ecole->id]) }}" class="p-2 bg-danger  text-white"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>
                       @endforeach
@@ -58,7 +60,7 @@
       processing: true,
       serverSide: true,
 
-      ajax: '{!! route('see_schools') !!}',
+      ajax: '{!! route('see.schools') !!}',
 
       columns: [
             { data: 'Nom', name: 'nom' },

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Classe;
 
 use App\Models\Classe;
 use Illuminate\Http\Request;
-use App\Note;
+use App\Http\Controllers\Controller;
+
 
 class ClassesController extends Controller
 {

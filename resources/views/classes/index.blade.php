@@ -18,6 +18,7 @@
                     <table id="myTable" class="table table-bordered table-striped">
                       <thead>
                       <tr>
+                        <th>ID</th>
                         <th>Code</th>
                         <th>Nom</th>
                         <th>Action</th>
@@ -26,10 +27,11 @@
                       <tbody>
                         @foreach ($classes as $classe)
                         <tr>
+                            <td>{{ $classe->id }}</td>
                             <td>{{ $classe->code }}</td>
                             <td>{{ $classe->nom }}</td>
                             <td class="d-flex">
-                              <a href="" class="p-2 bg-info  text-black"><i class="fa fa-eye"></i></a>
+                              <a href="{{ route('see.students') }}" class="p-2 bg-info  text-black"><i class="fa fa-eye"></i></a>
                               <a href="" class="p-2 bg-warning  text-black"><i class="fa fa-pencil"></i></a>
                               <a href="" class="p-2 bg-danger  text-white"><i class="fa fa-trash-o"></i></a>
                             </td>
@@ -58,7 +60,7 @@
       processing: true,
       serverSide: true,
 
-      ajax: '{!! route('see_classes') !!}',
+      ajax: '{!! route('see.classes') !!}',
 
       columns: [
             { data: 'First name', name: 'id' },
