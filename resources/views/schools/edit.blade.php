@@ -7,7 +7,7 @@
 
             <form class="form-horizontal" action="{{ route('schools.update', $school) }}" method="post">
                 <input type="hidden" name="_method" value="PUT">
-                {{ csrf_field() }}
+                @csrf
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     <label for="name" class="col-md-4 control-label">@lang('School Name')</label>
 

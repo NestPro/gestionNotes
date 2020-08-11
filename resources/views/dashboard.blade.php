@@ -3,7 +3,7 @@
 <body class="layout skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
         @include('layouts.partials._dash_nav')
-        @include('layouts.partials._dash_sidebar')
+        @include('layouts.partials.leftside-menubar')
         
         <div class="content-wrapper">
             @yield('content')

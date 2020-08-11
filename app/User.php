@@ -52,6 +52,10 @@ class User extends Model implements CanResetPasswordContract, AuthorizableContra
         return $qurey->where('role', 'student');
     }
 
+    public function scopeOfSchool($query, int $school_id){
+        return $query->where('school_id', $school_id);
+    }
+
     public function school()
     {
         return $this->belongsTo('App\Models\School');

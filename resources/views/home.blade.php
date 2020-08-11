@@ -5,7 +5,7 @@
 <body class="layout skin-blue sidebar-mini">
     <div class="wrapper boxed-wrapper">
         @include('layouts.partials._dash_nav')
-        @include('layouts.partials._dash_sidebar')
+        @include('layouts.partials.leftside-menubar')
         
         <div class="content-wrapper">
             <h1 class="text-uppercase" style="padding-top: 50px; text-align:center">Welcome to your admin panel</h1>

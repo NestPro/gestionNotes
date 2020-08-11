@@ -27,7 +27,6 @@ Route::middleware(['auth', 'master'])->group(function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
 Route::middleware(['auth'])->group(function () {
    
     Route::get('users/{school_code}/{student_code}/{teacher_code}', 'UserController@index');
@@ -50,7 +49,7 @@ Route::middleware(['auth', 'master'])->group(function () {
     Route::post('register/admin', 'UserController@storeAdmin');
     Route::get('master/activate-admin/{id}', 'UserController@activateAdmin');
     Route::get('master/deactivate-admin/{id}', 'UserController@deactivateAdmin');
-    Route::get('school/admin-list/{school_id}', 'SchoolController@show');
+    Route::get('school/admin-list/{school_id}', 'School\SchoolsController@show');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
