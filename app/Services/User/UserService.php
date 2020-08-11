@@ -4,18 +4,14 @@ namespace App\Services\User;
 use App\Models\StudentInfo;
 use App\User;
 
-use Illuminate\Support\Facades\DB;
-
 class UserService {
     
     protected $user;
     protected $student_info;
-    protected $db;
 
-    public function __construct(User $user, StudentInfo $student_info, DB $db){
+    public function __construct(User $user, StudentInfo $student_info){
         $this->user = $user;
         $this->student_info = $student_info;
-        $this->db = $db;
     }
 
     public function isListOfStudents($school_code, $student_code){
@@ -37,13 +33,13 @@ class UserService {
     public function updateStudentInfo($request, $id){
         $info = StudentInfo::firstOrCreate(['student_id' => $id]);
         $info->student_id = $id;
-        $info->session = (!empty($request->session)) ? $request->session : '';
-        $info->group = (!empty($request->group)) ? $request->group : '';
-        $info->birthday = (!empty($request->birthday)) ? $request->birthday : '';
-        $info->father_name = (!empty($request->father_name)) ? $request->father_name : '';
-        $info->father_phone_number = (!empty($request->father_phone_number)) ? $request->father_phone_number : '';
-        $info->mother_name = (!empty($request->mother_name)) ? $request->mother_name : '';
-        $info->mother_phone_number = (!empty($request->mother_phone_number)) ? $request->mother_phone_number : '';
+        $info->session = $request->session;
+        $info->group = $request->group;
+        $info->birthday = $request->birthday;
+        $info->father_name = $request->father_name;
+        $info->father_phone_number = $request->father_phone_number;
+        $info->mother_name = $request->mother_name;
+        $info->mother_phone_number = $request->mother_phone_number;
         $info->user_id = auth()->user()->id;
         $info->save();
     }
@@ -83,60 +79,60 @@ class UserService {
     }
 
     public function storeAdmin($request){
-        $tb = new $this->user;
-        $tb->name = $request->name;
-        $tb->email = $request->email;
-        $tb->password = bcrypt($request->password);
-        $tb->role = 'admin';
-        $tb->active = 1;
-        $tb->school_id = session('register_school_id');
-        $tb->code = session('register_school_code');
-        $tb->student_code = session('register_school_id').date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
-        $tb->gender = $request->gender;
-        $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
-        $tb->phone_number = $request->phone_number;
-        $tb->verified = 1;
-        $tb->save();
-        return $tb;
+        $us = new $this->user;
+        $us->name = $request->name;
+        $us->email = $request->email;
+        $us->password = bcrypt($request->password);
+        $us->role = 'admin';
+        $us->active = 1;
+        $us->school_id = session('register_school_id');
+        $us->code = session('register_school_code');
+        $us->student_code = session('register_school_id').date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
+        $us->gender = $request->gender;
+        $us->nationality = $request->nationality;
+        $us->phone_number = $request->phone_number;
+        $us->verified = 1;
+        $us->save();
+        return $us;
     }
 
     public function storeStudent($request){
-        $tb = new $this->user;
-        $tb->name = $request->name;
-        $tb->email = (!empty($request->email)) ? $request->email : '';
-        $tb->password = bcrypt($request->password);
-        $tb->role = 'student';
-        $tb->active = 1;
-        $tb->school_id = auth()->user()->school_id;
-        $tb->code = auth()->user()->code;// School Code
-        $tb->student_code = auth()->user()->school_id.date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
-        $tb->gender = $request->gender;
-        $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
-        $tb->phone_number = $request->phone_number;
-        $tb->address = (!empty($request->address)) ? $request->address : '';
-        $tb->about = (!empty($request->about)) ? $request->about : '';
-        $tb->verified = 1;
-        $tb->save();
-        return $tb;
+        $us = new $this->user;
+        $us->name = $request->name;
+        $us->email = $request->email;
+        $us->password = bcrypt($request->password);
+        $us->role = 'student';
+        $us->active = 1;
+        $us->school_id = auth()->user()->school_id;
+        $us->code = auth()->user()->code;// School Code
+        $us->student_code = auth()->user()->school_id.date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
+        $us->gender = $request->gender;
+        $us->nationality = $request->nationality;
+        $us->phone_number = $request->phone_number;
+        $us->address = $request->address;
+        $us->about = $request->about;
+        $us->verified = 1;
+        $us->save();
+        return $us;
     }
 
-    public function storeStaff($request, $role){
-        $tb = new $this->user;
-        $tb->name = $request->name;
-        $tb->email = (!empty($request->email)) ? $request->email : '';
-        $tb->password = bcrypt($request->password);
-        $tb->role = $role;
-        $tb->active = 1;
-        $tb->school_id = auth()->user()->school_id;
-        $tb->code = auth()->user()->code;
-        $tb->student_code = auth()->user()->school_id.date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
-        $tb->gender = $request->gender;
-        $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
-        $tb->phone_number = $request->phone_number;
-        $tb->verified = 1;
-        $tb->classe = (!empty($request->classe_id))?$request->classe_id:0;
+    public function storeTeach($request, $role){
+        $us = new $this->user;
+        $us->name = $request->name;
+        $us->email = $request->email;
+        $us->password = bcrypt($request->password);
+        $us->role = $role;
+        $us->active = 1;
+        $us->school_id = auth()->user()->school_id;
+        $us->code = auth()->user()->code;
+        $us->student_code = auth()->user()->school_id.date('y').substr(number_format(time() * mt_rand(), 0, '', ''), 0, 5);
+        $us->gender = $request->gender;
+        $us->nationality = $request->nationality;
+        $us->phone_number = $request->phone_number;
+        $us->verified = 1;
+        $us->classe = $request->classe_id;
         
-        $tb->save();
-        return $tb;
+        $us->save();
+        return $us;
     }
 }

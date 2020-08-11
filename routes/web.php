@@ -18,18 +18,66 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
-/*
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});*/
 
 Auth::routes();
+Route::middleware(['auth', 'master'])->group(function () {
+    Route::get('/masters', 'Master\MasterController@index')->name('masters.index');
+    Route::resource('/schools', 'School\SchoolsController')->only(['index', 'edit', 'store', 'update']);
+});
+
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('/schools', 'School\SchoolsController')->only(['index', 'edit', 'store', 'update']);
-//Route::get('/students', 'Student\StudentsController@index')->name('see.students');
-//Route::get('/students/edit/{id}', 'Student\StudentsController@edit')->name('edit.student');
-//Route::get('/schools', 'School\SchoolsController@index')->name('see.schools');
-//Route::post('/schools/store/{id}', 'School\SchoolsController@store')->name('schools.store');
-//Route::get('/schools/edit/{id}', 'School\SchoolsController@edit')->name('edit.school');
-//Route::post('/schools/update/{id}/', 'School\SchoolsController@update')->name('update.school');
-//Route::get('/classes', 'Classe\ClassesController@index')->name('see.classes');
+
+
+Route::middleware(['auth'])->group(function () {
+   
+    Route::get('users/{school_code}/{student_code}/{teacher_code}', 'UserController@index');
+    Route::get('users/{school_code}/{role}', 'UserController@indexOther');
+    Route::get('user/{user_code}', 'UserController@show');
+    Route::get('user/config/change_password', 'UserController@changePasswordGet');
+    Route::post('user/config/change_password', 'UserController@changePasswordPost');
+});
+
+Route::middleware(['auth', 'master'])->group(function () {
+    Route::get('register/admin/{id}/{code}', function ($id, $code) {
+        session([
+        'register_role' => 'admin',
+        'register_school_id' => $id,
+        'register_school_code' => $code,
+        ]);
+
+        return redirect()->route('register');
+    });
+    Route::post('register/admin', 'UserController@storeAdmin');
+    Route::get('master/activate-admin/{id}', 'UserController@activateAdmin');
+    Route::get('master/deactivate-admin/{id}', 'UserController@deactivateAdmin');
+    Route::get('school/admin-list/{school_id}', 'SchoolController@show');
+});
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::prefix('school')->name('school.')->group(function () {
+        Route::post('add-class', 'Classe\ClasseController@store');
+        //Route::post('add-department', 'SchoolsController@addDepartment');
+    });
+
+    Route::prefix('register')->name('register.')->group(function () {
+        Route::get('student', 'UserController@redirectToRegisterStudent');
+        
+        Route::get('teacher', function () {
+            $classes = \App\Models\Classe::where('school_id', \Auth::user()->school_id)->get();
+            session([
+        'register_role' => 'teacher',
+        'classes' => $classes,
+      ]);
+
+            return redirect()->route('register');
+        });
+        
+        Route::post('student', 'UserController@store');
+        Route::post('teacher', 'UserController@storeTeacher');
+    });
+});
+
+Route::middleware(['auth', 'master.admin'])->group(function () {
+    Route::get('edit/user/{id}', 'UserController@edit');
+    Route::post('edit/user', 'UserController@update');
+});

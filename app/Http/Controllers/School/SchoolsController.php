@@ -67,7 +67,7 @@ class SchoolsController extends Controller
      */
     public function show($school_id)
     {
-        $admins = User::bySchool($school_id)->where('role', 'admin')->get();
+        $admins = User::ofSchool($school_id)->where('role', 'admin')->get();
 
         return view('school.admin-list', compact('admins'));
     }
@@ -87,7 +87,6 @@ class SchoolsController extends Controller
 
     }
 
-    
     /**
      * Update the specified resource in storage.
      *

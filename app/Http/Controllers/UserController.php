@@ -8,7 +8,6 @@ use App\Http\Requests\User\CreateTeacherRequest;
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\Classe;
-use App\Models\Departement;
 use App\Services\User\UserService;
 use App\User;
 use Illuminate\Http\Request;
@@ -25,16 +24,10 @@ class UserController extends Controller
         $this->userService = $userService;
         $this->user = $user;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @param $school_code
-     * @param $student_code
-     * @param $teacher_code
-     * @return \Illuminate\Http\Response
-     */
+    
+    //Display a listing of the resource.
+    
     public function index($school_code, $student_code, $teacher_code){
-        session()->forget('section-attendance');
         
         if($this->userService->isListOfStudents($school_code, $student_code))
             return $this->userService->indexView('list.student-list', $this->userService->getStudents());
@@ -44,34 +37,25 @@ class UserController extends Controller
             return view('home');
     }
 
-    /**
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function redirectToRegisterStudent()
     {
         $classes = Classe::query()
-            ->bySchool(\Auth::user()::user()->school->id)
+            ->ofSchool(\Auth::user()::user()->school->id)
             ->pluck('id');
 
         session([
             'register_role' => 'student',
+            'register_classe' => $classes,
         ]);
 
         return redirect()->route('register');
     }
 
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
     public function changePasswordGet()
     {
         return view('profile.change-password');
     }
 
-    /**
-     * @param ChangePasswordRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function changePasswordPost(ChangePasswordRequest $request)
     {
         if (Hash::check($request->old_password, Auth::user()->password)) {
@@ -86,13 +70,8 @@ class UserController extends Controller
     }
 
     
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param CreateUserRequest $request
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //Store a newly created resource in storage.
+   
     public function store(CreateUserRequest $request)
     {
         $this->userService->storeStudent($request);
@@ -100,10 +79,7 @@ class UserController extends Controller
         return back()->with('status', __('Saved'));
     }
 
-    /**
-     * @param CreateAdminRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
+   
     public function storeAdmin(CreateAdminRequest $request)
     {
         $this->userService->storeAdmin($request);
@@ -111,14 +87,10 @@ class UserController extends Controller
         return back()->with('status', __('Saved'));
     }
 
-    /**
-     * @param CreateTeacherRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
+   
     public function storeTeacher(CreateTeacherRequest $request)
     {
-        
-        $this->userService->storeStaff($request, 'teacher');
+        $this->userService->storeTeach($request, 'teacher');
 
         return back()->with('status', __('Saved'));
     }
@@ -149,17 +121,12 @@ class UserController extends Controller
         $user = $this->user->find($id);
         
         $classes = Classe::query()
-            ->bySchool($user->school_id)
-            ->get();
-
-        $departments = Departement::query()
-            ->bySchool($user->school_id)
+            ->ofSchool($user->school_id)
             ->get();
 
         return view('profile.edit', [
             'user' => $user,
             'classe' => $classes,
-            'departments' => $departments,
         ]);
     }
 
@@ -173,18 +140,18 @@ class UserController extends Controller
     {
 		 
         DB::transaction(function () use ($request) {
-            $tb = $this->user->find($request->user_id);
-            $tb->name = $request->name;
-            $tb->email = (!empty($request->email)) ? $request->email : '';
-            $tb->nationality = (!empty($request->nationality)) ? $request->nationality : '';
-            $tb->phone_number = $request->phone_number;
-            $tb->address = (!empty($request->address)) ? $request->address : '';
-            $tb->about = (!empty($request->about)) ? $request->about : '';
+            $us = $this->user->find($request->user_id);
+            $us->name = $request->name;
+            $us->email = $request->email;
+            $us->nationality = $request->nationality;
+            $us->phone_number = $request->phone_number;
+            $us->address = $request->address;
+            $us->about = $request->about;
             if ($request->user_role == 'teacher') {
-                $tb->classe = $request->classe_id;
-                $tb->cours = $request->class_teacher_cours_id;
+                $us->classe = $request->classe_id;
+                $us->cours = $request->class_teacher_cours_id;
             }
-            if ($tb->save()) {
+            if ($us->save()) {
                 if ($request->user_role == 'student') {
             
                 }
@@ -193,12 +160,9 @@ class UserController extends Controller
 
         return back()->with('status', __('Saved'));
     }
-
-    /**
-     * Activate admin
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
+    
+    //Activate admin
+     
     public function activateAdmin($id)
     {
         $admin = $this->user->find($id);
@@ -214,11 +178,9 @@ class UserController extends Controller
         return back()->with('status', __('Saved'));
     }
 
-    /**
-     * Deactivate admin
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
+    
+    //Deactivate admin
+    
     public function deactivateAdmin($id)
     {
        $admin = $this->user->find($id);

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-//use App\Models\Model;
 
 class StudentInfo extends Model
 {
@@ -16,7 +15,7 @@ class StudentInfo extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function scopeBySchool($query, int $school_id){
+    public function scopeOfSchool($query, int $school_id){
         return $query->where('school_id', $school_id);
     }
 }

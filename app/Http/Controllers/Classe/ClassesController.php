@@ -20,7 +20,7 @@ class ClassesController extends Controller
 
         //return view('classes.index', ['classes' => $classes]);
 
-        return ($school_id > 0)? ClasseRessource::collection(Classe::bySchool($school_id)->get()):response()->json(['Invalid school ID '. $school_id, 404]);
+        return ClasseRessource::collection(Classe::ofSchool($school_id)->get());
     }
 
     /**
@@ -50,7 +50,6 @@ class ClassesController extends Controller
         $cl->name = $request->name;
         $cl->code = $request->code;
         $cl->school_id = \Auth::user()->school_id;
-
         $cl->save();
 
         return view('status', __('Created'));
@@ -91,8 +90,8 @@ class ClassesController extends Controller
         $cl->name = $request->name;
         $cl->code = $request->code;
         $cl->school_id = $request->schol_id;
-
-        return ($cl->save())?response()->json(['status' => 'success']):response(['status' => 'error']);
+        $cl->save();
+        return view('status', __('Updated'));
     }
 
     /**
@@ -104,11 +103,13 @@ class ClassesController extends Controller
     public function destroy($id)
     {
 
-        return (Classe::destroy($id))?response()->json(['status' => 'success']):response()->json(['status' => 'error']);
+        Classe::destroy($id);
+
+        return view('status', __('Deleted'));
 /*
     $classe = $this->model->findOrFail($id);
 	
-	$classe->delete();
+	$classe->delete();*/
 	
     }
 }

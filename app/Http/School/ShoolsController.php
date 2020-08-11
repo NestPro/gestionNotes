@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Ecole;
 use App\User;
 use App\Models\Classe;
 use App\Models\School;
-use App\Models\Departement;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -65,9 +64,9 @@ class EcolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($school_id){
+        $admins = User::ofSchool($school_id)->where('role', 'admin')->get();
+        return view('school.admin-list', compact('admins'));
     }
 
     /**
@@ -76,31 +75,8 @@ class EcolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(School $school)
-    {
-        //$ecole = Ecole::where(['id' => $id])->first();
-        
-        //return view('ecoles.edit', ['ecole' => $ecole]);
+    public function edit(School $school){
         return view('schools.edit', compact('school'));
-
-    }
-
-    public function saveSchoolChange(Request $request, $id){
-        
-        $validate = $request->validate([
-            'nom' => 'required',
-            'addresse' => 'required'
-        ]);
-
-        if($validate){
-            $ecole = Ecole::where(['id' => $id])->first();
-
-            $ecole->nom = $validate['nom'];
-            $ecole->addresse = $validate['adresse'];
-
-            $ecole->save();
-        }
-        return redirect()->route('see.schools');
     }
 
     /**
@@ -117,6 +93,19 @@ class EcolesController extends Controller
         $school->save();
 
         return redirect()->route('schools.index');
+    }
+
+    public function addClass(Request $request){
+        $request->validate([
+            'name' => 'required|string|max:50',
+        ]);
+
+        $sc = new Classe;
+        $sc->school_id = \Auth::user()->school_id;
+        $sc->name = $request->name;
+        $sc->save();
+
+        return back()->with('status', __('Classe created'));
     }
 
     /**

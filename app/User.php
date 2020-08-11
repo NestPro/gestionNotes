@@ -71,20 +71,3 @@ class User extends Model implements CanResetPasswordContract, AuthorizableContra
         return $this->role == $role ? true : false;
     }
 }
-
-
-/*
-
-    public function section()
-    {
-        return $this->belongsTo('App\Section');
-    }
-
-    public function studentBoardExam(){
-        return $this->hasMany('App\StudentBoardExam','student_id');
-    }
-
-    public function notifications(){
-        return $this->hasMany('App\Notification','student_id');
-    }
-*/
