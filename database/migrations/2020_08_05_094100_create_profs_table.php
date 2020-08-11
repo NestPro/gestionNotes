@@ -17,13 +17,10 @@ class CreateProfsTable extends Migration
             $table->id();
             $table->string('nom');
             $table->string('prenom');
-            $table->string('addresse');
+            $table->string('address');
             $table->integer('classe_id')->unsigned();
             $table->integer('matiere_id')->unsigned();
-            $table->integer('ecole_id')->unsigned();
-            $table->foreign('classe_id')->references('id')->on('classes')->onDelete('cascade');
-            $table->foreign('matiere_id')->references('id')->on('matieres')->onDelete('cascade');
-            $table->foreign('ecole_id')->references('id')->on('ecoles')->onDelete('cascade');
+            $table->integer('school_id')->unsigned();
             $table->timestamps();
         });
     }

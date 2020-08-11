@@ -25,10 +25,11 @@ Route::get('/dashboard', function () {
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/etudiants', 'Etudiant\EtudiantsController@index')->name('see.students');
-Route::get('/etudiants/edit/{id}', 'Etudiant\EtudiantsController@edit')->name('edit.student');
-Route::get('/ecoles', 'Ecole\EcolesController@index')->name('see.schools');
-Route::get('/ecoles/delete/{id}', 'Ecole\EcolesController@destroy')->name('delete.school');
-Route::get('/ecoles/edit/{id}', 'Ecole\EcolesController@edit')->name('edit.school');
-Route::post('/ecoles/edit/{id}/save', 'Ecole\EcolesController@saveSchoolChange')->name('edit.school.post');
-Route::get('/classes', 'Classe\ClassesController@index')->name('see.classes');
+Route::resource('/schools', 'School\SchoolsController')->only(['index', 'edit', 'store', 'update']);
+//Route::get('/students', 'Student\StudentsController@index')->name('see.students');
+//Route::get('/students/edit/{id}', 'Student\StudentsController@edit')->name('edit.student');
+//Route::get('/schools', 'School\SchoolsController@index')->name('see.schools');
+//Route::post('/schools/store/{id}', 'School\SchoolsController@store')->name('schools.store');
+//Route::get('/schools/edit/{id}', 'School\SchoolsController@edit')->name('edit.school');
+//Route::post('/schools/update/{id}/', 'School\SchoolsController@update')->name('update.school');
+//Route::get('/classes', 'Classe\ClassesController@index')->name('see.classes');

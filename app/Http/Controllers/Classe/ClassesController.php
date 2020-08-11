@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Classe;
 
-use App\Models\Classe;
+use App\Models\Classe as Classe;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Http\Resources\ClasseRessource;
 
 class ClassesController extends Controller
 {
@@ -14,11 +14,13 @@ class ClassesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($school_id)
     {
-        $classes = Classe::all();
+        //$classes = Classe::all();
 
-        return view('classes.index', ['classes' => $classes]);
+        //return view('classes.index', ['classes' => $classes]);
+
+        return ($school_id > 0)? ClasseRessource::collection(Classe::bySchool($school_id)->get()):response()->json(['Invalid school ID '. $school_id, 404]);
     }
 
     /**
@@ -39,7 +41,19 @@ class ClassesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'code' => 'required',
+            'name' => 'required',
+        ]);
+
+        $cl = new Classe;
+        $cl->name = $request->name;
+        $cl->code = $request->code;
+        $cl->school_id = \Auth::user()->school_id;
+
+        $cl->save();
+
+        return view('status', __('Created'));
     }
 
     /**
@@ -50,7 +64,7 @@ class ClassesController extends Controller
      */
     public function show($id)
     {
-        //
+        return new ClasseRessource(Classe::find($id));
     }
 
     /**
@@ -73,7 +87,12 @@ class ClassesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cl = Classe::find($id);
+        $cl->name = $request->name;
+        $cl->code = $request->code;
+        $cl->school_id = $request->schol_id;
+
+        return ($cl->save())?response()->json(['status' => 'success']):response(['status' => 'error']);
     }
 
     /**
@@ -84,17 +103,12 @@ class ClassesController extends Controller
      */
     public function destroy($id)
     {
+
+        return (Classe::destroy($id))?response()->json(['status' => 'success']):response()->json(['status' => 'error']);
 /*
     $classe = $this->model->findOrFail($id);
-	$classe->matieres()->detach();
 	
 	$classe->delete();
 	
-	// Détruit les notes associées à cette classes
-	$notes = Note::where('classe_id', '=', $id)->get();
-	foreach($notes as $note) {
-		$note->delete();
-	}
-	return true;*/
     }
 }

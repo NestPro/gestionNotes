@@ -13,10 +13,12 @@ class CreateEcolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ecoles', function (Blueprint $table) {
+        Schema::create('schools', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nom');
-            $table->string('addresse');
+            $table->string('name');
+            $table->string('address')->nullable();
+            $table->text('about');
+            $table->integer('code')->unique();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateEcolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ecoles');
+        Schema::dropIfExists('schools');
     }
 }

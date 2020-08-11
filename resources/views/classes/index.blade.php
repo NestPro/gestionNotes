@@ -11,7 +11,6 @@
     <!-- Main content -->
    
       <div class="content">
-      
         <div class="info-box">
             <h4 class="text-black mb-4">Lites des classes</h4>
             <div class="table-responsive">

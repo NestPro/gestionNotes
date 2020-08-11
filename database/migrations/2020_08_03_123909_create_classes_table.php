@@ -16,10 +16,8 @@ class CreateClassesTable extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code');
-            $table->string('nom');
-            $table->integer('nbr_etudiants')->unsigned();
-            $table->integer('ecole_id')->unsigned();
-            $table->foreign('ecole_id')->references('id')->on('ecoles')->onDelete('cascade');
+            $table->string('name');
+            $table->integer('school_id')->unsigned();
             $table->timestamps();
         });
     }

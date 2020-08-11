@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class LoginController extends Controller
 {
@@ -26,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -36,5 +40,24 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function redirectTo(){
+        $role = Auth::user()->role;
+
+        return ($role == 'master')?'/masters':'/home';
+    }
+
+    public function username(){
+        $login = request()->input('email');
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL)?'email':'phone_number';
+        request()->merge([$field => $login]);
+        return $field;
+    }
+
+    public function credentials(Request $request){
+        $credentials = $request->only($this->username(), 'password');
+        $credentials = Arr::add($credentials, 'active', 1);
+        return $credentials;
     }
 }

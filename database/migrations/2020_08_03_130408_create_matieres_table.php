@@ -13,10 +13,16 @@ class CreateMatieresTable extends Migration
      */
     public function up()
     {
-        Schema::create('matieres', function (Blueprint $table) {
+        Schema::create('cours', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nom');
+            $table->string('name');
             $table->integer('coefficient')->unsigned();
+            $table->string('time');
+            $table->integer('note')->unsigned();
+            $table->integer('classe_id')->unsigned();
+            $table->integer('schoolid')->unsigned();
+            $table->integer('teacher_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -28,6 +34,6 @@ class CreateMatieresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('matieres');
+        Schema::dropIfExists('cours');
     }
 }

@@ -17,11 +17,4 @@ class Matiere extends Model
     public function notes(){
         return $this->hasMany('App\Note');
     }
-
-    public function validationRules() {
-		return [	 
-			'nom'=>'required',
-			'coefficient'=>'required|integer|min:1|max:5'
-	];	
-	}
 }

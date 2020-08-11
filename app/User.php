@@ -2,13 +2,23 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Auth\Authenticatable;
 
-class User extends Authenticatable
+
+class User extends Model implements CanResetPasswordContract, AuthorizableContract, AuthenticatableContract
 {
-    use Notifiable;
+    use Notifiable, Authenticatable, Authorizable, CanResetPassword;
+
+    //use Notifiable;
+    //use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role', 'code',/* school code*/'student_code', 'active', 'verified', 'school_id', 'address', 'about', 'phone_number', 'nationality', 'gender',
     ];
 
     /**
@@ -36,4 +46,45 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeStudent($qurey)
+    {
+        return $qurey->where('role', 'student');
+    }
+
+    public function school()
+    {
+        return $this->belongsTo('App\Models\School');
+    }
+
+    public function classe()
+    {
+        return $this->belongsTo('App\Models\Classe');
+    }
+
+    public function studentInfo(){
+        return $this->hasOne('App\Models\StudentInfo', 'student_id');
+    }
+
+    public function hasRole(string $role): bool
+    {
+        return $this->role == $role ? true : false;
+    }
 }
+
+
+/*
+
+    public function section()
+    {
+        return $this->belongsTo('App\Section');
+    }
+
+    public function studentBoardExam(){
+        return $this->hasMany('App\StudentBoardExam','student_id');
+    }
+
+    public function notifications(){
+        return $this->hasMany('App\Notification','student_id');
+    }
+*/
