@@ -7,6 +7,7 @@ use App\Models\Classe;
 use App\Models\School;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SchoolRequest;
 
 class EcolesController extends Controller
 {
@@ -46,16 +47,16 @@ class EcolesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SchoolRequest $request)
     {
         School::create([
             'name'        => $request->name,
-            'address' => $request->address,
+            //'address' => $request->address,
             'about'       => $request->about,
             'code'        => date("y").substr(number_format(time() * mt_rand(), 0, '', ''), 0, 6),
         ]);
 
-        return redirect()->route('schools.index')->with('status', __('Created'));
+        return redirect()->route('schools.index');
     }
 
     /**
@@ -116,8 +117,6 @@ class EcolesController extends Controller
      */
     public function destroy($id)
     {
-        Ecole::destroy($id);
-
-        return redirect()->route('see.schools');
+        
     }
 }

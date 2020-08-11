@@ -1,6 +1,6 @@
-{{--@extends('layouts.app')--}}
-@extends('dashboard')
+{{--@extends('dashboard')--}}
 
+@extends('layouts.app')
 @section('title', __('Admins'))
 
 @section('content')

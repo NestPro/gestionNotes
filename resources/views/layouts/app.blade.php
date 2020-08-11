@@ -96,10 +96,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title') - {{ (Auth::check() && (Auth::user()->role == 'student' || Auth::user()->role == 'teacher'
+    <title>@yield('title') - {{ (Auth::check() &&  (Auth::user()->role == 'teacher'
         || Auth::user()->role == 'admin'))?Auth::user()->school->name:config('app.name') }}</title>
 
-    <link rel="stylesheet" href="{{ url('css/loader.css') }}">
 
     <script src="{{ url('js/vendors.js') }}"></script>
 

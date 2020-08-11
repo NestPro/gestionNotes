@@ -28,41 +28,6 @@
                         </div>
                     </div>
 
-                    {{--<div class="form-group{{ $errors->has('medium') ? ' has-error' : '' }}">
-                        <label for="medium" class="col-md-4 control-label">@lang('School Medium')</label>
-
-                        <div class="col-md-6">
-                            <select id="medium" class="form-control" name="medium">
-                                <option selected="selected">@lang('Bangla')</option>
-                                <option>@lang('English')</option>
-                                <option>@lang('Hindi')</option>
-                                <option>@lang('Spanish')</option>
-                                <option>@lang('Chinese')</option>
-                                <option>@lang('Arabic')</option>
-                            </select>
-
-                            @if ($errors->has('medium'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('medium') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="form-group{{ $errors->has('established') ? ' has-error' : '' }}">
-                        <label for="established" class="col-md-4 control-label">@lang('School Established')</label>
-
-                        <div class="col-md-6">
-                            <input id="established" type="text" class="form-control" name="established" value="{{ old('established') }}" placeholder="@lang('School Established')" required>
-
-                            @if ($errors->has('established'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('established') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                    </div>--}}
-
                     <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
                         <label for="about" class="col-md-4 control-label">@lang('About')</label>
 
@@ -79,7 +44,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">@lang('Close')</button>
-                    <button type="submit" class="btn btn-primary">@lang('Save changes')</button>
+                    <button type="submit" class="btn btn-primary">@lang('Save')</button>
                 </div>
             </div>
         </form>
