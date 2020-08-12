@@ -86,7 +86,7 @@ class UserController extends Controller
 
         return back()->with('status', __('Saved'));
     }
-   
+
     public function storeTeacher(CreateTeacherRequest $request)
     {
         $this->userService->storeTeach($request, 'teacher');
@@ -160,6 +160,35 @@ class UserController extends Controller
         return back()->with('status', __('Saved'));
     }
 
+    public function activateAdmin($id)
+    {
+        $admin = $this->user->find($id);
+
+        if ($admin->active !== 0) {
+            $admin->active = 0;
+        } else {
+            $admin->active = 1;
+        }
+
+        $admin->save();
+
+        return back();
+    }
+
+    public function deactivateAdmin($id)
+    {
+       $admin = $this->user->find($id);
+
+        if ($admin->active !== 1) {
+            $admin->active = 1;
+        } else {
+            $admin->active = 0;
+        }
+
+        $admin->save();
+
+        return back();
+    }
     
     /**
      * Remove the specified resource from storage.

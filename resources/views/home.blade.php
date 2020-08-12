@@ -30,7 +30,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2" id="side-navbar">
-            @include('layouts.leftside-menubar')
+            @include('layouts.partials.leftside-menubar')
         </div>
         <div class="col-md-10" id="main-container">
             <div class="panel panel-default" style="border-top: 0px;">

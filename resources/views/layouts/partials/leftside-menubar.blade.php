@@ -15,23 +15,17 @@
         @endif
         @if(Auth::user()->role == 'admin')
         <li class="nav-item">
-          <a class="nav-link" href="{{ url('school/sections?course=1') }}"><i class="material-icons">class</i> <span class="nav-link-text">@lang('Classes')</span></a>
-        </li>
-        @endif
-        @if(Auth::user()->role == 'admin')
-        <li class="nav-item">
-          <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/1/0')}}"><i class="material-icons">contacts</i>
+          <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/1/0')}}">
             <span class="nav-link-text">@lang('Students')</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/0/1')}}"><i class="material-icons">contacts</i>
+          <a class="nav-link" href="{{url('users/'.Auth::user()->school->code.'/0/1')}}">
             <span class="nav-link-text">@lang('Teachers')</span></a>
         </li>
         @endif
         @if(Auth::user()->role == 'admin')        
-        <li class="nav-item" style="border-bottom: 1px solid #dbd8d8;"></li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('settings.index') }}"><i class="material-icons">settings</i> <span class="nav-link-text">@lang('Academic Settings')</span></a>
+          <a class="nav-link" href="{{ route('settings.index') }}"><span class="nav-link-text">@lang('Settings')</span></a>
         </li>
         @endif
 

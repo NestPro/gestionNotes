@@ -10,7 +10,7 @@ $factory->define(School::class, function (Faker $faker) {
     return [
 
         'name'        => $faker->name,
-        'address'     => Str::random(10),
+        'address'     => e($faker->address),
         'about'       => $faker->sentences(3, true),
         'code'        => date("y").substr(number_format(time() * mt_rand(),0,'',''),0,6),
     ];

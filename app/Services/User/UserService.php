@@ -33,8 +33,8 @@ class UserService {
     public function updateStudentInfo($request, $id){
         $info = StudentInfo::firstOrCreate(['student_id' => $id]);
         $info->student_id = $id;
-        $info->session = $request->session;
-        $info->group = $request->group;
+        $info->annee = $request->annee;
+        $info->classe = $request->classe;
         $info->birthday = $request->birthday;
         $info->father_name = $request->father_name;
         $info->father_phone_number = $request->father_phone_number;

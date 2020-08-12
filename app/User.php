@@ -26,7 +26,7 @@ class User extends Model implements CanResetPasswordContract, AuthorizableContra
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'code',/* school code*/'student_code', 'active', 'verified', 'school_id', 'address', 'about', 'phone_number', 'nationality', 'gender',
+        'name', 'email', 'password', 'role', 'code', 'student_code', 'active', 'verified', 'school_id', 'address', 'about', 'phone_number', 'nationality', 'gender', 'classe_id',
     ];
 
     /**

@@ -51,7 +51,7 @@ class EcolesController extends Controller
     {
         School::create([
             'name'        => $request->name,
-            //'address' => $request->address,
+            'address' => $request->address,
             'about'       => $request->about,
             'code'        => date("y").substr(number_format(time() * mt_rand(), 0, '', ''), 0, 6),
         ]);

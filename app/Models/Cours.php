@@ -6,17 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cours extends Model
 {
-    /**
-     * Get the class record associated with the user.
-    */
-    public function class()
-    {
-        return $this->belongsTo('App\Models\Classe');
-    }
     
-    /**
-     * Get the teacher record associated with the user.
-    */
     public function teacher()
     {
         return $this->belongsTo('App\User');

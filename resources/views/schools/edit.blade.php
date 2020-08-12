@@ -22,6 +22,20 @@
                     </div>
                 </div>
 
+                <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                    <label for="address" class="col-md-4 control-label">@lang('School address')</label>
+
+                    <div class="col-md-6">
+                        <input id="address" type="text" class="form-control" name="name" value="{{ $school->address }}" placeholder="@lang('School address')" required>
+
+                        @if ($errors->has('address'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('address') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+
                 <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
                     <label for="about" class="col-md-4 control-label">@lang('About School')</label>
 

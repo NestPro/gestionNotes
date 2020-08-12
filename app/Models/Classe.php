@@ -12,12 +12,17 @@ class Classe extends Model
 
     
     public function students(){
-        return $this->hasMany('App\Models\StudentInfo');
+        return $this->hasMany('App\User');
     }
 
+    public function teachers(){
+        return $this->hasMany('App\User');
+    }
+    
+    /*
     public function cours(){
         return $this->hasMany('App\Models\Cours');
-    }
+    }*/
 
     public function school(){
         return $this->belongsTo('App\Models\School');
