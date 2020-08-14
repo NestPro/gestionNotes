@@ -9,14 +9,13 @@ class Classe extends Model
     protected $table = "classes";
     
     protected $fillable = ['code', 'nom', 'school_id',];
-
     
     public function students(){
         return $this->hasMany('App\User');
     }
 
-    public function teachers(){
-        return $this->hasMany('App\User');
+    public function teacher(){
+        return $this->hasOne('App\User');
     }
     
     /*

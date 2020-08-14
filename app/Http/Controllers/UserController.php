@@ -87,6 +87,7 @@ class UserController extends Controller
         return back()->with('status', __('Saved'));
     }
 
+    
     public function storeTeacher(CreateTeacherRequest $request)
     {
         $this->userService->storeTeach($request, 'teacher');
@@ -138,7 +139,6 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request)
     {
 		 
-        DB::transaction(function () use ($request) {
             $us = $this->user->find($request->user_id);
             $us->name = $request->name;
             $us->email = $request->email;
@@ -155,7 +155,6 @@ class UserController extends Controller
             
                 }
             }
-        });
 
         return back()->with('status', __('Saved'));
     }

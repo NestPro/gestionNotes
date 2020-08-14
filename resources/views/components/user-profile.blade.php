@@ -6,7 +6,6 @@
         @endif
         
         @if($user->role == "student")
-         <button class="btn btn-xs btn-success pull-right" role="button" id="btnPrint"><i class="material-icons">print</i> @lang('Print Profile')</button>
          <div class="visible-print-block" id="profile-content">
          <div class="row">
             <div class="col-md-12">
@@ -14,10 +13,7 @@
                 <h2>{{$user->classe->school->name}}</h2>
                 <div style="font-size: 10px;">{{$user->classe->school->about}}</div>
               </div>
-              <div class="col-xs-4">
-                <h3>@lang('Student Profile')</h3>
-                <div style="font-size: 10px;">@lang('Printing Date'): {{Carbon\Carbon::now()->format('d/m/Y')}}</div>
-              </div>
+          
             </div>
           </div>
           <br/>

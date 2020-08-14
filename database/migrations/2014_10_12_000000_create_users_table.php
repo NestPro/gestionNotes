@@ -22,7 +22,8 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('active');
             $table->integer('code')->nullable();
             $table->integer('school_id')->nullable();
-            $table->integer('student_code')->unique()->nullable();            $table->string('gender')->default('');
+            $table->integer('student_code')->unique()->nullable();
+            $table->string('gender')->default('');
             $table->string('nationality')->default('');
             $table->string('phone_number')->unique()->default('');
             $table->string('address')->default('');

@@ -24,12 +24,12 @@ class SchoolsController extends Controller
         return view('schools.index', ['schools' => $schools]);
     }
 
-    public function view($id)
+    /*public function view($id)
     {
         $classes = Classe::where(['classe_id' => $id])->get();
 
         return view('classes.index', ['classes' => $classes]);
-    }
+    }*/
 
     /**
      * Show the form for creating a new resource.
@@ -51,7 +51,7 @@ class SchoolsController extends Controller
     {
         School::create([
             'name'        => $request->name,
-            'address' => $request->address,
+            'address'     => $request->address,
             'about'       => $request->about,
             'code'        => date("y").substr(number_format(time() * mt_rand(), 0, '', ''), 0, 6),
         ]);
@@ -97,6 +97,7 @@ class SchoolsController extends Controller
     public function update(Request $request, School $school)
     {
         $school->name = $request->name;
+        $school->address = $request->address;
         $school->about = $request->about;
         $school->save();
 

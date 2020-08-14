@@ -20,7 +20,7 @@ class ClassesController extends Controller
 
         //return view('classes.index', ['classes' => $classes]);
 
-        return ClasseRessource::collection(Classe::ofSchool($school_id)->get());
+        return dd(ClasseRessource::collection(Classe::ofSchool($school_id)->get()));
     }
 
     /**

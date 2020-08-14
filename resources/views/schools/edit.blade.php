@@ -4,7 +4,6 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <h2 class="text-center">@lang('Edit') {{$school->name}}</h2>
-
             <form class="form-horizontal" action="{{ route('schools.update', $school) }}" method="post">
                 <input type="hidden" name="_method" value="PUT">
                 @csrf
@@ -26,7 +25,7 @@
                     <label for="address" class="col-md-4 control-label">@lang('School address')</label>
 
                     <div class="col-md-6">
-                        <input id="address" type="text" class="form-control" name="name" value="{{ $school->address }}" placeholder="@lang('School address')" required>
+                        <input id="address" type="text" class="form-control" name="address" value="{{ $school->address }}" placeholder="@lang('School address')" required>
 
                         @if ($errors->has('address'))
                             <span class="help-block">

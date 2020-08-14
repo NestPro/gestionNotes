@@ -1,5 +1,291 @@
+@include('layouts.partials._dash_head')
+<body class="hold-transition login-page">
+    <div class="container{{ (\Auth::user()->role == 'master')? '' : '-fluid' }}">
+        <div class="login-box">
+        <div class="login-box-body">
+            <h3 class="login-box-msg">Sign Up</h3>
+            <form action="{{ route('register') }}" method="POST">
+
+                <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
+                        <label for="name">* @lang('Full Name')</label>
+                        <div>
+                            <input id="name" type="text" name="name" class="form-control sty1" placeholder=" Full Name" required>
+                            @if ($errors->has('name'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('name') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                </div>
+
+                <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <label for="email">* @lang('Email')</label>
+
+                    <div>
+                        <input id="email" type="email" class="form-control sty1" name="email" placeholder="Email" required>
+
+                        @if ($errors->has('email'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback{{ $errors->has('phone_number') ? ' has-error' : '' }}">
+                    <label for="phone_number">* @lang('Phone Number')</label>
+
+                    <div>
+                        <input id="phone_number" name="phone_number" type="text" class="form-control sty1" name="phone_number" placeholder="Phone Number" required>
+
+                        @if ($errors->has('phone_number'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('phone_number') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+            
+                <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
+                    <label for="password">* @lang('Password')</label>
+
+                    <div>
+                        <input id="password" type="password" class="form-control sty1" name="password" placeholder="Password" required>
+
+                        @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <label for="password-confirm">* @lang('Confirm Password')</label>
+
+                    <div>
+                        <input id="password-confirm" type="password" class="form-control sty1" name="password_confirmation"
+                        placeholder="Confirm Password" required>
+                    </div>
+                </div>
+
+                @if(session('register_role', 'student') == 'student')
+                <div class="form-group has-feedback{{ $errors->has('birthday') ? ' has-error' : '' }}">
+                    <label for="birthday">* @lang('Birthday')</label>
+
+                    <div>
+                        <input id="birthday" type="text" class="form-control sty1" name="birthday" placeholder="Birthday" required>
+
+                        @if ($errors->has('birthday'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('birthday') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+                @endif
+                @if(session('register_role', 'teacher') == 'teacher')
+                <div class="form-group has-feedback{{ $errors->has('classe') ? ' has-error' : '' }}">
+                    <label for="classe">* @lang('Classe')</label>
+
+                    <div>
+                        <select id="classe" class="form-control sty1" name="classe_id" required>
+                            @if (count(session('classes')) > 0)
+                                @foreach (session('classes') as $d)
+                                    <option value="{{$d->id}}">{{$d->name}}</option>
+                                @endforeach
+                            @endif
+                        </select>
+
+                        @if ($errors->has('classe'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('classe') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+                @endif
+
+                <div class="form-group has-feedback{{ $errors->has('nationality') ? ' has-error' : '' }}">
+                    <label for="nationality">* @lang('Nationality')</label>
+
+                    <div class="col-md-6">
+                        <input id="nationality" type="text" class="form-control sty1" name="nationality" placeholder="Nationality" required>
+
+                        @if ($errors->has('nationality'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('nationality') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback{{ $errors->has('gender') ? ' has-error' : '' }}">
+                    <label for="gender">@lang('Gender')</label>
+
+                    <div>
+                        <select id="gender" class="form-control sty1" name="gender">
+                            <option selected="selected">@lang('Male')</option>
+                            <option>@lang('Female')</option>
+                        </select>
+
+                        @if ($errors->has('gender'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('gender') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+                @if(session('register_role', 'student') == 'student')
+                <div class="form-group has-feedback{{ $errors->has('annee') ? ' has-error' : '' }}">
+                    <label for="annee">* @lang('Annee')</label>
+
+                    <div>
+                        <input id="annee" type="text" class="form-control sty1" name="annee" required>
+
+                        @if ($errors->has('annee'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('annee') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback{{ $errors->has('address') ? ' has-error' : '' }}">
+                    <label for="address">* @lang('Address')</label>
+
+                    <div>
+                        <input id="address" type="text" class="form-control sty1" name="address" placeholder="Address" required>
+
+                        @if ($errors->has('address'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('address') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback{{ $errors->has('about') ? ' has-error' : '' }}">
+                    <label for="about">@lang('About')</label>
+
+                    <div>
+                        <textarea id="about" class="form-control" name="about">{{ old('about') }}</textarea>
+
+                        @if ($errors->has('about'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('about') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback{{ $errors->has('father_name') ? ' has-error' : '' }}">
+                    <label for="father_name">* @lang('Father\'s Name')</label>
+
+                    <div>
+                        <input id="father_name" type="text" class="form-control sty1" name="father_name" value="{{ old('father_name') }}" placeholder="Father's Name"
+                            required>
+
+                        @if ($errors->has('father_name'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('father_name') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback{{ $errors->has('father_phone_number') ? ' has-error' : '' }}">
+                    <label for="father_phone_number">@lang('Father\'s Phone Number')</label>
+
+                    <div>
+                        <input id="father_phone_number" type="text" class="form-control sty1" name="father_phone_number"
+                            value="{{ old('father_phone_number') }}" placeholder="Father's Phone Number">
+
+                        @if ($errors->has('father_phone_number'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('father_phone_number') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback{{ $errors->has('mother_name') ? ' has-error' : '' }}">
+                    <label for="mother_name">* @lang('Mother\'s Name')</label>
+
+                    <div>
+                        <input id="mother_name" type="text" class="form-control sty1" name="mother_name" value="{{ old('mother_name') }}" placeholder="Mother's Name"
+                            required>
+
+                        @if ($errors->has('mother_name'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('mother_name') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback{{ $errors->has('mother_phone_number') ? ' has-error' : '' }}">
+                    <label for="mother_phone_number">@lang('Mother\'s Phone Number')</label>
+
+                    <div>
+                        <input id="mother_phone_number" type="text" class="form-control sty1" name="mother_phone_number"
+                            value="{{ old('mother_phone_number') }}" placeholder="Mother's Phone Number">
+
+                        @if ($errors->has('mother_phone_number'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('mother_phone_number') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+                @endif
+
+                <div class="col-xs-4 m-t-1">
+                <button type="submit" class="btn btn-primary btn-block btn-flat">Sign UP</button>
+                </div>
+                <!-- /.col --> 
+            </div>
+            </form>
+        </div>
+        <!-- /.login-box-body --> 
+        </div>
+    </div> 
+    @include('layouts.partials._dash_script')
+</body>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{--
 @extends('layouts.app')
 
 @section('title', __('Register'))
@@ -26,7 +312,7 @@
             <div class="alert alert-success">
                 {{ session('status') }}
                 {{-- Display View admin links --}}
-                @if (session('register_school_id'))
+                {{--@if (session('register_school_id'))
                     <a href="{{ url('school/admin-list/' . session('register_school_id')) }}" target="_blank" class="text-white pull-right">@lang('View Admins')</a>
                 @endif
             </div>
@@ -345,8 +631,8 @@
         $("#registerForm").submit();
     });
 </script>
-@endsection
-
+@endsection--}}
+    
 
 {{--
 <div class="container">

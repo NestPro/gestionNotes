@@ -24,8 +24,8 @@ class SchoolRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'        => 'required|string|max:255',
-            'address'      => 'required',
+            'name'        => 'required|string|max:50',
+            'address'     => 'required',
             'about'       => 'required',
         ];
     }

@@ -26,14 +26,15 @@ Route::middleware(['auth', 'master'])->group(function () {
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/classes/{school_id}', 'Classe\ClassesController@show');
 
 Route::middleware(['auth'])->group(function () {
    
     Route::get('users/{school_code}/{student_code}/{teacher_code}', 'UserController@index');
     Route::get('users/{school_code}/{role}', 'UserController@indexOther');
     Route::get('user/{user_code}', 'UserController@show');
-    Route::get('user/config/change_password', 'UserController@changePasswordGet');
-    Route::post('user/config/change_password', 'UserController@changePasswordPost');
+    //Route::get('user/config/change_password', 'UserController@changePasswordGet');
+    //Route::post('user/config/change_password', 'UserController@changePasswordPost');
 });
 
 Route::middleware(['auth', 'master'])->group(function () {

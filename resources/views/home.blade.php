@@ -14,7 +14,7 @@
     </div>
     @include('layouts.partials._dash_script')
 </body>--}}
-
+{{--
 @extends('layouts.app')
 
 @section('content')
@@ -76,4 +76,73 @@
         </div>
     </div>
 </div>
+@endsection --}}
+
+@extends('dashboard')
+
+@section('content')
+ 
+    <!-- Content Header (Page header) -->
+    <div class="content-header sty-one">
+      <h1>Dashboard</h1>
+      <ol class="breadcrumb">
+        <li><a href="{{ route('home') }} ">Home</a></li>
+        <li><i class="fa fa-angle-right"></i> Dashboard</li>
+      </ol>
+    </div>
+    
+    <!-- Main content -->
+    <div class="content">
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+            @endif
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-darkblue"> <span class="info-box-icon bg-transparent"><i class="ti-stats-up text-white"></i></span>
+            <div class="info-box-content">
+              <h6 class="info-box-text text-white">All Students</h6>
+              <h1 class="text-white">{{ $totalStudents }}</h1>
+              <span class="progress-description text-white"></span> </div>
+            <!-- /.info-box-content --> 
+          </div>
+          <!-- /.info-box --> 
+        </div>
+        <!-- /.col -->
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-green text-white"> <span class="info-box-icon bg-transparent"><i class="ti-face-smile"></i></span>
+            <div class="info-box-content">
+              <h6 class="info-box-text text-white">All Teachers</h6>
+              <h1 class="text-white">{{$totalTeachers}}</h1>
+              <span class="progress-description text-white"></span> </div>
+            <!-- /.info-box-content --> 
+          </div>
+          <!-- /.info-box --> 
+        </div>
+        <!-- /.col -->
+        <div class="col-lg-3 col-sm-6 col-xs-12">
+          <div class="info-box bg-orange"> <span class="info-box-icon bg-transparent"><i class="ti-bar-chart"></i></span>
+            <div class="info-box-content">
+              <h6 class="info-box-text text-white">All Classes</h6>
+              <h1 class="text-white">{{ $totalClasses }}</h1>
+              <span class="progress-description text-white"></span> </div>
+            <!-- /.info-box-content --> 
+          </div>
+          <!-- /.info-box --> 
+        </div>
+        <!-- /.col -->
+        
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="background-color: rgba(242,245,245,0.8);">
+                    <div class="panel-body">
+                        <h3>@lang('Welcome to') {{Auth::user()->school->name}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
 @endsection

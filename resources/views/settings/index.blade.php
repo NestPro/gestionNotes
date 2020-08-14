@@ -1,13 +1,10 @@
-@extends('layouts.app')
+@extends('dashboard')
 
 @section('title', __('Settings'))
 
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2" id="side-navbar">
-                @include('layouts.partials.leftside-menubar')
-            </div>
             <div class="col-md-10" id="main-container">
                 <div class="panel panel-default">
                     <div class="page-panel-title">@lang('Settings')</div>
@@ -38,28 +35,12 @@
                                         <div><small>@lang('Click Class')</small></div>
                                         <div class="row">
                                             @foreach($classes as $class)
-                                                @if($class->school_id == $school->id)
+                                                {{--@if($class->school_id == $school->id)--}}
                                                     <div class="col-sm-3">
-                                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal{{$class->id}}" style="margin-top: 5%;">@lang('Manage') {{$class->class_number}} {{!empty($class->group)? '- '.$class->group:''}}</button>
                                                         <!-- Modal -->
-                                                        <div class="modal fade" id="myModal{{$class->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                        <div class="modal fade" id="myModal{{$class->name}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                                             <div class="modal-dialog modal-lg" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                        <h4 class="modal-title" id="myModalLabel">@lang('All Sections of Class') {{$class->class_number}}</h4>
-                                                                    </div>
-                                                                    <div class="modal-body">
-																		<div class="form-check">
-																			<?php 
-																				$checked = Session::has('ignoreSessions') ? (Session::get('ignoreSessions') == "true" ? "checked='checked'" : "") : "";
-																			?>
-																			<input class="form-check-input position-static" type="checkbox" name="ignoreSessionsCheck" id="ignoreSessionsId" <?php echo $checked ?>>
-																			@lang("Ignore Sessions when listing students for promoting")
-																		</div>
-                                                                                                                                           </div>
+                                                                <div class="modal-content">                                                                </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">@lang('Close')</button>
                                                                     </div>
@@ -67,7 +48,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                @endif
+                                                {{--@endif--}}
                                             @endforeach
                                         </div>
                                     </td>

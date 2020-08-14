@@ -1,3 +1,64 @@
+@include('layouts.partials._dash_head')
+<body class="hold-transition login-page">
+
+<div class="login-box">
+    <div class="login-box-body">
+      <h3 class="login-box-msg">Sign In</h3>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+    <div class="panel-body">
+      <form action="{{ route('login') }}" method="POST">
+        @csrf
+        <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
+            <label for="email">@lang('E-Mail')</label>
+            <div>
+                <input id="email" type="text" class="form-control sty1" name="email" placeholder="Email" required autofocus>
+                @if ($errors->has('email'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+        <div class="form-group has-feedback {{ $errors->has('password')?'has-error':'' }}">
+            <label for="password">@lang('Password')</label>
+            <div> 
+                <input id="password" type="password" class="form-control sty1" name="password" placeholder="Password" required>
+                @if ($errors->has('password'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
+            </div>
+        </div>
+
+          <div class="col-xs-4 m-t-1">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          </div>
+
+      </form>
+      </div> 
+  </div>
+  @include('layouts.partials._dash_script')
+
+</body>
+</html>
+
+
+
+
+
+
+
 {{--
 <div class="container">
     <div class="row justify-content-center">
@@ -128,7 +189,7 @@
   <!-- /.login-box --> 
   @endsection--}}
 
-
+{{--
 @extends('layouts.app')
 
 @section('title', __('Login'))
@@ -181,7 +242,7 @@
                                 @endif
                             </div>
                         </div>
-                        {{--
+                        
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
@@ -191,17 +252,17 @@
                                 </div>
                             </div>
                         </div>
-                        --}}
+                        
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     @lang('Login')
                                 </button>
-                                {{--
+                                
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     @lang('Forgot Your Password?')
                                 </a>
-                                --}}
+                                
                             </div>
                         </div>
                     </form>
@@ -210,4 +271,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection--}}

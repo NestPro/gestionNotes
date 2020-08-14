@@ -1,23 +1,9 @@
-{{--@extends('dashboard')--}}
-
-@extends('layouts.app')
+@extends('dashboard')
 @section('title', __('Admins'))
 
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2" id="side-navbar">
-            @if (session('status'))
-            <div class="alert alert-success">
-                {{ session('status') }}
-            </div>
-            @endif
-            {{--<ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('schools.index') }}"><i class="material-icons">gamepad</i> @lang('Manage School')</a>
-                </li>
-            </ul>--}}
-        </div>
         <div class="col-md-10" id="main-container">
             <h2>Admins</h2>
             <div class="panel panel-default">

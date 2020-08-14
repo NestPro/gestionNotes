@@ -17,7 +17,6 @@
 <link rel="stylesheet" href="{{ asset('dashboard_assets/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('dashboard_assets/css/font-awesome/css/font-awesome.min.css') }}">
 <link rel="stylesheet" href="{{ asset('dashboard_assets/css/et-line-font/et-line-font.css') }}">
-<link rel="stylesheet" href="{{ asset('dashboard_assets/bootstrap/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('dashboard_assets/css/themify-icons/themify-icons.css') }}">
 
 @yield('stylesheets')
