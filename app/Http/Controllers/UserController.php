@@ -40,7 +40,7 @@ class UserController extends Controller
     public function redirectToRegisterStudent()
     {
         $classes = Classe::query()
-            ->ofSchool(\Auth::user()::user()->school->id)
+            ->ofSchool(\Auth::user()->school->id)
             ->pluck('id');
 
         session([

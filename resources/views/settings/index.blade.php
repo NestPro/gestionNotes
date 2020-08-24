@@ -25,14 +25,14 @@
                                 <tr>
                                     <td>
                                         <a href="#collapse" role="button" class="btn btn-danger btn-sm" data-toggle="collapse" aria-expanded="false" aria-controls="collapse">
-                                            @lang('Classe')
+                                            @lang('Add Classe')
                                         </a>
                                     </td>
                                 </tr>
                                 <tr class="collapse" id="collapse" aria-labelledby="heading" aria-expanded="false">
                                     <td colspan="12">
                                         @include('layouts.master.add-class-form')
-                                        <div><small>@lang('Click Class')</small></div>
+                                        {{--<div><small>@lang('Click Class')</small></div>--}}
                                         <div class="row">
                                             @foreach($classes as $class)
                                                 {{--@if($class->school_id == $school->id)--}}

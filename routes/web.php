@@ -59,7 +59,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('school')->name('school.')->group(function () {
-        Route::post('add-class', 'Classe\ClasseController@store');
+        Route::post('add-class', 'Classe\ClassesController@store');
         //Route::post('add-classe', 'School\SchoolsController@addClasse');
     });
 
@@ -72,7 +72,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         'register_role' => 'teacher',
         'classes' => $classes,
       ]);
-
+        
             return redirect()->route('register');
         });
         

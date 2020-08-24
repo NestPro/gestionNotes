@@ -20,7 +20,7 @@ class ClassesController extends Controller
 
         //return view('classes.index', ['classes' => $classes]);
 
-        return dd(ClasseRessource::collection(Classe::ofSchool($school_id)->get()));
+        return ClasseRessource::collection(Classe::ofSchool($school_id)->get());
     }
 
     /**
@@ -52,7 +52,7 @@ class ClassesController extends Controller
         $cl->school_id = \Auth::user()->school_id;
         $cl->save();
 
-        return view('status', __('Created'));
+        return back()->with('status', __('Created'));
     }
 
     /**

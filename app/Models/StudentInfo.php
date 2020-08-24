@@ -14,7 +14,7 @@ class StudentInfo extends Model
     public function student(){
         return $this->belongsTo('App\User');
     }
-
+    
     public function scopeOfSchool($query, int $school_id){
         return $query->where('school_id', $school_id);
     }

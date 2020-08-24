@@ -14,15 +14,15 @@
       <form class="form-horizontal" action="{{url('school/add-class')}}" method="post">
           @csrf
           <div class="form-group">
-            <label for="classNumber{{$school->id}}" class="col-sm-4 control-label">@lang('Class Number/Name')</label>
+            <label for="classNumber{{$school->id}}" class="col-sm-4 control-label">@lang('Class Number')</label>
             <div class="col-sm-8">
-              <input type="text" name="class_number" class="form-control" id="classNumber{{$school->id}}" placeholder="@lang('Class Number/Name')" required>
+              <input type="text" name="code" class="form-control" id="classNumber{{$school->id}}" placeholder="@lang('Class Number')" required>
             </div>
           </div>
           <div class="form-group">
-            <label for="classRoomNumber{{$school->id}}" class="col-sm-4 control-label">@lang('Class Group (If Any)')</label>
+            <label for="classRoomNumber{{$school->id}}" class="col-sm-4 control-label">@lang('Class Name')</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" name="group" id="classRoomNumber{{$school->id}}" placeholder="@lang('Sixieme, Cinquieme, Quatrieme')">
+              <input type="text" class="form-control" name="name" id="classRoomNumber{{$school->id}}" placeholder="@lang('CI, CP, CE1, CE2, CM1, CM2')">
             </div>
           </div>
           <div class="form-group">

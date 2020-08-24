@@ -11,6 +11,6 @@ class ClasseSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Classe::class, 3)->create();
+        factory(App\Models\Classe::class, 6)->create();
     }
 }

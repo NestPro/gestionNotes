@@ -16,7 +16,7 @@ class CreateClassesTable extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->integer('school_id')->unsigned();
             $table->timestamps();
         });

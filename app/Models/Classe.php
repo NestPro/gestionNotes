@@ -17,16 +17,11 @@ class Classe extends Model
     public function teacher(){
         return $this->hasOne('App\User');
     }
-    
-    /*
-    public function cours(){
-        return $this->hasMany('App\Models\Cours');
-    }*/
 
     public function school(){
         return $this->belongsTo('App\Models\School');
     }
-
+    
     public function scopeOfSchool($query, int $school_id){
         return $query->where('school_id', $school_id);
     }
